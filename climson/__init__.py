@@ -8,10 +8,10 @@ import inspect
 
 from climson import climson
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 __author__ = 'takumakanari (chemtrails.t@gmail.com)'
 __license__ = 'MIT License'
-__description__ = 'Tool for easy and simplify to implement applications that is using multi-command CLI.'
+__description__ = 'Commandline tool for easy and simplify to implement applications that is using multi-command CLI.'
 
 
 class ClimsonClient(object):

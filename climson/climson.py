@@ -38,6 +38,13 @@ class BaseCommand(object):
 
     options = ()
 
+    def __init__(self, optargs):
+        self._optargs = optargs
+
+    @property
+    def optargs(self):
+        return self._optargs
+
     @classmethod
     def cleanup_args(cls, args_dict):
         for exclude_arg in ('__exec_func__', '__subcommand__'):
@@ -45,8 +52,9 @@ class BaseCommand(object):
                 args_dict.pop(exclude_arg)
         return args_dict
 
-    def execute(self, args):
-        args_dict = args.__dict__
+    def execute(self):
+        optargs = self.optargs
+        args_dict = optargs.__dict__
         self.cleanup_args(args_dict)
         if not self.validate(**args_dict):
             raise ValidateError(args_dict)
@@ -79,8 +87,8 @@ def add(parser, command_cls):
     cmd = parser.add_parser(command_cls.name, help=command_cls.description)
 
     def inner_exec_func(args):
-        handler = command_cls()
-        return handler.execute(args)
+        handler = command_cls(args)
+        return handler.execute()
 
     cmd.set_defaults(__exec_func__=inner_exec_func)
 

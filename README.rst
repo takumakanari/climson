@@ -36,7 +36,7 @@ Create *handler-class* for each sub commands ::
 
 If you want to use some options, specify it to field *options* like this.
 
-It means same as *argparse.add_argument()*.
+It means same as *argparse.add_argument()*, and it's 2 ways to reference opt's values in do_command(), **kwargs with do_command method or self.optargs.
 
 ::
 
@@ -62,7 +62,10 @@ It means same as *argparse.add_argument()*.
         # commandline-option's name/value as **kwargs
         #
         def do_command(self, message=None, age=0):
-            print 'Goodbye, {}(age:{})'.format(message, age)
+            print 'Goodbye, {}(age:{}) in kwargs'.format(message, age)
+
+            # Or can reference original args object with self.optargs
+            print 'Goodbye, {}(age:{}) in optargs'.format(self.optargs.message, self.optargs.are)
 
         #
         # Do Custom validate if you need.
@@ -73,8 +76,8 @@ It means same as *argparse.add_argument()*.
             return True
 
 .. note::
-    If you want to validate option values, override method *validate(self, **kwargs)*.
-    It returns bool as check result or raise climson.climson.ValidateError when validate failed.
+    If you want to validate option values, override method *validate(self, **kwargs)*. It returns bool as check result or raise climson.climson.ValidateError when validate failed.
+
 
 
 Register commands and kick it.

@@ -20,7 +20,9 @@ class Hello(climson.BaseCommand):
     )
 
     def do_command(self, name=None, age=0):
-        print 'Hello, {} age={}'.format(name, age)
+        print 'Hello, {} age={} in kwargs'.format(name, age)
+        # or use self.optargs
+        print 'Hello, {} age={} in self.optargs'.format(self.optargs.name, self.optargs.age)
 
 
 class GoodBye(climson.BaseCommand):
