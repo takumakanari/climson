@@ -8,7 +8,7 @@ import inspect
 
 from climson import climson
 
-__version__ = '0.1.3'
+__version__ = '0.2.0'
 __author__ = 'takumakanari (chemtrails.t@gmail.com)'
 __license__ = 'MIT License'
 __description__ = 'Commandline tool for easy and simplify to implement applications that is using multi-command CLI.'
